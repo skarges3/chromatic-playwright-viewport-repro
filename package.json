@@ -1,0 +1,20 @@
+{
+  "name": "chromatic-playwright-viewport-repro",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "install:browser": "playwright install chromium",
+    "capture": "playwright test --workers=1",
+    "use-fixture": "node use-fixture.mjs",
+    "build": "build-archive-storybook -o sb",
+    "check": "node render.mjs sb viewport-js-sized-element--snapshot-1",
+    "serve": "node serve.mjs sb",
+    "repro": "npm run capture && npm run build && npm run check",
+    "repro:fixture": "npm run use-fixture && npm run build && npm run check",
+    "repro:workaround": "npm run use-fixture && node strip-globals.mjs && npm run build && npm run check"
+  },
+  "dependencies": {
+    "@chromatic-com/playwright": "1.0.0",
+    "@playwright/test": "1.63.0"
+  }
+}
